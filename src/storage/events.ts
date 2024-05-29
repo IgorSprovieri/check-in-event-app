@@ -36,7 +36,7 @@ export const getOneEvent = async (eventName: string) => {
     const parsedEvents: Event[] = JSON.parse(events);
     const eventIndex = parsedEvents.findIndex(({ name }) => name === eventName);
 
-    if (!eventIndex) {
+    if (eventIndex < 0) {
       throw new Error("Evento não encontrado");
     }
 
@@ -65,24 +65,28 @@ export const createEvent = async (newEvent: Event) => {
   }
 };
 
-export const editEvent = async (eventToEdit: Event) => {
+export const editEvent = async (eventName: string, editedEvent: Event) => {
   try {
     const events = await AsyncStorage.getItem(EVENTS_KEY);
     const parsedEvents: Event[] = events ? JSON.parse(events) : [];
 
-    const eventIndex = parsedEvents.findIndex(
-      ({ name }) => name === eventToEdit.name
-    );
+    const eventIndex = parsedEvents.findIndex(({ name }) => name === eventName);
 
-    if (!eventIndex) {
+    if (eventIndex < 0) {
       throw new Error("Evento não encontrado");
     }
 
-    parsedEvents[eventIndex] = eventToEdit;
+    if (eventName !== editedEvent.name) {
+      if (parsedEvents.find(({ name }) => name === editedEvent.name)) {
+        throw new Error("Nome já usado em outro evento");
+      }
+    }
+
+    parsedEvents[eventIndex] = editedEvent;
 
     await AsyncStorage.setItem(EVENTS_KEY, JSON.stringify(parsedEvents));
 
-    return parsedEvents;
+    return parsedEvents[eventIndex];
   } catch (error: any) {
     throw new Error(error?.message);
   }

@@ -11,25 +11,10 @@ import {
 import { useEffect, useState } from "react";
 import { Event, createEvent, getAllEvents } from "../../storage";
 
-export const Home = () => {
+export const Home = ({ navigation }: any) => {
   const [modalIsOpen, setModalOpen] = useState(false);
   const [eventName, setEventName] = useState("");
   const [events, setEvents] = useState<Event[]>([]);
-
-  const handleAddEvent = async () => {
-    try {
-      const newEvents = await createEvent({
-        name: eventName,
-        participants: [],
-      });
-
-      setEvents(newEvents);
-      setModalOpen(false);
-      setEventName("");
-    } catch (error: any) {
-      Alert.alert("Erro ao Adicionar Evento", error?.message);
-    }
-  };
 
   const loadEvents = async () => {
     try {
@@ -46,6 +31,30 @@ export const Home = () => {
   useEffect(() => {
     loadEvents();
   }, []);
+
+  const handleAddEvent = async () => {
+    try {
+      const newEvents = await createEvent({
+        name: eventName,
+        participants: [],
+      });
+
+      setEvents(newEvents);
+      setModalOpen(false);
+      setEventName("");
+    } catch (error: any) {
+      Alert.alert("Erro ao Adicionar Evento", error?.message);
+    }
+  };
+
+  const handleCancelAddEvent = () => {
+    setModalOpen(false);
+    setEventName("");
+  };
+
+  const handleSelectEvent = (eventName: string) => {
+    navigation.navigate("Participants", { eventName: eventName });
+  };
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -65,7 +74,7 @@ export const Home = () => {
           renderItem={({ item }) => (
             <EventCard
               eventName={item.name}
-              handleSelect={() => {}}
+              onPress={() => handleSelectEvent(item.name)}
               participants={item.participants.length}
               confirmed={item.participants.reduce(
                 (accumulator, { checked }) =>
@@ -85,10 +94,7 @@ export const Home = () => {
             />
             <View style={styles.formButtonContainer}>
               <Button.Normal onPress={handleAddEvent}>Adicionar</Button.Normal>
-              <Button.Normal
-                variant="ghost"
-                onPress={() => setModalOpen(false)}
-              >
+              <Button.Normal variant="ghost" onPress={handleCancelAddEvent}>
                 Cancelar
               </Button.Normal>
             </View>

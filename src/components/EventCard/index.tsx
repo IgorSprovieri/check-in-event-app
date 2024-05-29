@@ -5,17 +5,17 @@ type Props = {
   eventName: string;
   participants: number;
   confirmed: number;
-  handleSelect: () => void;
+  onPress: () => void;
 };
 
 export const EventCard = ({
   eventName,
   participants,
   confirmed,
-  handleSelect,
+  onPress,
 }: Props) => {
   return (
-    <TouchableOpacity style={styles.mainContainer} onPress={handleSelect}>
+    <TouchableOpacity style={styles.mainContainer} onPress={onPress}>
       <View style={styles.textContainer}>
         <Text style={styles.nameText}>{eventName}</Text>
         <Text style={styles.participantsText}>

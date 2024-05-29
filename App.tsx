@@ -1,6 +1,4 @@
-import { Home } from "./src/screens";
-import { StatusBar } from "expo-status-bar";
-import { SafeAreaView } from "react-native";
+import { Home, Participants } from "./src/screens";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -16,6 +14,13 @@ export default function App() {
           }}
           name="Home"
           component={Home}
+        />
+        <Stack.Screen
+          options={{
+            headerShown: false,
+          }}
+          name="Participants"
+          component={Participants}
         />
       </Stack.Navigator>
     </NavigationContainer>
