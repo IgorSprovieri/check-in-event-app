@@ -84,10 +84,13 @@ export const Home = () => {
               onChangeText={setEventName}
             />
             <View style={styles.formButtonContainer}>
-              <Button.Big onPress={handleAddEvent}>Adicionar</Button.Big>
-              <Button.Cancel onPress={() => setModalOpen(false)}>
+              <Button.Normal onPress={handleAddEvent}>Adicionar</Button.Normal>
+              <Button.Normal
+                variant="ghost"
+                onPress={() => setModalOpen(false)}
+              >
                 Cancelar
-              </Button.Cancel>
+              </Button.Normal>
             </View>
           </View>
         </Modal>
