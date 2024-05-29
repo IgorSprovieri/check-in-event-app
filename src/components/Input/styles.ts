@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { theme } from "../../theme";
 
 export const styles = StyleSheet.create({
   input: {
@@ -6,8 +7,8 @@ export const styles = StyleSheet.create({
     height: 40,
     borderRadius: 8,
     borderStyle: "solid",
-    borderColor: "#E1E0E0",
-    borderWidth: 0.9,
+    borderColor: theme.colors.lightGray,
+    borderWidth: 2,
     paddingHorizontal: 12,
     paddingVertical: 8,
     justifyContent: "center",

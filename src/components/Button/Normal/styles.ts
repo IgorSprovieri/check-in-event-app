@@ -1,15 +1,16 @@
 import { StyleSheet } from "react-native";
+import { theme } from "../../../theme";
 
 export type NormalButtonViants = "solid" | "ghost";
 
 const variants = {
   solid: {
-    backgroundColor: "#3C9480",
-    textColor: "#FFF",
+    backgroundColor: theme.colors.main,
+    textColor: theme.colors.white,
   },
   ghost: {
-    backgroundColor: "transparent",
-    textColor: "#3C9480",
+    backgroundColor: theme.colors.transparent,
+    textColor: theme.colors.main,
   },
 };
 
