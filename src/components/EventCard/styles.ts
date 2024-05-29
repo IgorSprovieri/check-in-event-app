@@ -3,26 +3,24 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   mainContainer: {
     borderRadius: 16,
-    borderStyle: "solid",
-    borderColor: "#E1E0E0",
-    borderWidth: 0.9,
-    paddingHorizontal: 12,
-    paddingVertical: 8,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: 10,
+    backgroundColor: "#FFF",
   },
   textContainer: {
     justifyContent: "center",
     gap: 4,
   },
   nameText: {
-    fontSize: 20,
-    fontWeight: "bold",
+    fontSize: 18,
+    fontWeight: "700",
   },
   participantsText: {
-    fontSize: 16,
+    fontSize: 14,
   },
   image: {
     width: 32,
